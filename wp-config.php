@@ -14,24 +14,23 @@
  * @package WordPress
  */
 
+define('WP_SITEURL', 'http://' . $_SERVER['SERVER_NAME'] . '/wordpress');
+define('WP_HOME',    'http://' . $_SERVER['SERVER_NAME']);
+
+define('WP_CONTENT_DIR', $_SERVER['DOCUMENT_ROOT'] . '/wp-content');
+define('WP_CONTENT_URL', 'http://' . $_SERVER['SERVER_NAME'] . '/wp-content');
+
 // ** MySQL settings - You can get this info from your web host ** //
-/** The name of the database for WordPress */
-define('DB_NAME', 'database_name_here');
-
-/** MySQL database username */
-define('DB_USER', 'username_here');
-
-/** MySQL database password */
-define('DB_PASSWORD', 'password_here');
-
-/** MySQL hostname */
-define('DB_HOST', 'localhost');
-
-/** Database Charset to use in creating database tables. */
-define('DB_CHARSET', 'utf8');
-
-/** The Database Collate type. Don't change this if in doubt. */
-define('DB_COLLATE', '');
+if (isset($_SERVER["DATABASE_URL"])) {
+  $db = parse_url($_SERVER["DATABASE_URL"]);
+  define("DB_NAME", trim($db["path"],"/"));
+  define("DB_USER", $db["user"]);
+  define("DB_PASSWORD", $db["pass"]);
+  define("DB_HOST", $db["host"]);
+}
+else {
+  die("Your heroku DATABASE_URL does not appear to be correctly specified.");
+}
 
 /**#@+
  * Authentication Unique Keys and Salts.
@@ -42,14 +41,14 @@ define('DB_COLLATE', '');
  *
  * @since 2.6.0
  */
-define('AUTH_KEY',         'put your unique phrase here');
-define('SECURE_AUTH_KEY',  'put your unique phrase here');
-define('LOGGED_IN_KEY',    'put your unique phrase here');
-define('NONCE_KEY',        'put your unique phrase here');
-define('AUTH_SALT',        'put your unique phrase here');
-define('SECURE_AUTH_SALT', 'put your unique phrase here');
-define('LOGGED_IN_SALT',   'put your unique phrase here');
-define('NONCE_SALT',       'put your unique phrase here');
+define('AUTH_KEY',         '+Gh+O%C0|%;}3I=e]AZ(w/6%[6-idR`|jZ+?1R:`D3C/De[ilZ|C#ts2xmij#}Q,');
+define('SECURE_AUTH_KEY',  '!R @-U-;Y(xcMrybjC_~akL4w:!>#.}Xiv?yg`zj)_wY+Ji1`$Z6rwAO#e*69r6)');
+define('LOGGED_IN_KEY',    'DOsEwOnbHUvZ+-,Qf/N$h+nkX#XgV^~9qd]hD}yZ<IrwOL+$tgYZ&fD?#~>~[Q{J');
+define('NONCE_KEY',        'D:iA+}|O2]P&1$*M:nBO^^h>Yj1hLyU^PVt=qRf_GCZ3$^$dX7LzXtF?~$;aZycC');
+define('AUTH_SALT',        'UYc 2;-c-^}{e5(-<V4hO?LCPx~P$:[zb*6V<Lt5@JwR(3q4$>[#qBDEyn5([7B&');
+define('SECURE_AUTH_SALT', '5NTw0-cuQf+(1yh{Y+oq]AC?/9Y-EXk?W~+Cw(BsL!i2/;-r!cV;C+o_66^NTr,,');
+define('LOGGED_IN_SALT',   '^Emh4g8|O-Dw+k2KTH<RH([|AEa5#$nS`in+.-_`un@m%gkI)`$#:t*cE4hQL$p`');
+define('NONCE_SALT',       '7nr0v`d^`U[F}o1?&+- =jo9#|C6dH[re,W&-HVH8@MXL.`!A5yyn5}G<DrTe42V');
 
 /**#@-*/
 
