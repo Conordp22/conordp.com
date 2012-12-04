@@ -21,7 +21,7 @@ git add .
 echo -n "write commit message: "
 read message
 git commit -m "$message"
-# git push origin master
+git push origin master
 git push heroku master
 heroku maintenance:off
 
